@@ -1,0 +1,14 @@
+@import "~bootstrap/scss/bootstrap";
+
+body,
+.App-header{
+  background-color: #282c34;
+}
+
+.navigation ~ *{
+  color: white;
+}
+
+.create{
+  color: #282c34;
+}
