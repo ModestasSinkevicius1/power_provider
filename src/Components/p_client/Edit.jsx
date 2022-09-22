@@ -6,25 +6,29 @@ import Clients from "../../Contexts/Clients";
 
 function Edit() {
 
-    const {modalEdit, setModalEdit, setEditData} = useContext(Clients);
+    const {modalEdit, setModalEdit, setEditData, supliers} = useContext(Clients);
 
-
-    const [title, setTitle] = useState('');
-    const [price, setPrice] = useState('');
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [number, setNumber] = useState('');
+    const [suplier, setSuplier] = useState(0);
 
     useEffect(()=>{
         if(null === modalEdit){
             return;
         }
-
-        setTitle(modalEdit.title);
-        setPrice(modalEdit.price);
+        setName(modalEdit.name);
+        setSurname(modalEdit.surname);
+        setNumber(modalEdit.counter);
+        setSuplier(modalEdit.power_id);
     },[modalEdit])
 
     const save = () =>{
         setEditData({
-            title,
-            price: parseFloat(price),
+            name,
+            surname,
+            number,
+            suplier: parseInt(suplier),
             id: modalEdit.id,
         })
         setModalEdit(null);
@@ -41,22 +45,32 @@ function Edit() {
             <h5 className="modal-title">Edit client</h5>
             <button type="button" className="btn-close" onClick={() => setModalEdit(null)}></button>
           </div>
-          <div class="modal-body">
-            
+          <div className="modal-body">
             
             <div className="create card m-4">
                 <div className="card-body">
                     <div className="mb-3">
                         <label className="form-label">Client Title</label>
-                        <input type="text" className="form-control" value={title} onChange={(e)=> setTitle(e.target.value)}/>
+                        <input type="text" className="form-control" value={name} onChange={(e)=> setName(e.target.value)}/>
                     </div>
                     <div className="mb-3">
                             <label className="form-label">Client price</label>
-                            <input type="text" className="form-control" value={price} onChange={(e)=> setPrice(e.target.value)}/>
+                            <input type="text" className="form-control" value={surname} onChange={(e)=> setSurname(e.target.value)}/>
+                    </div>
+                    <div className="mb-3">
+                            <label className="form-label">Client price</label>
+                            <input type="text" className="form-control" value={number} onChange={(e)=> setNumber(e.target.value)}/>
+                    </div>
+                    <div className="mb-3">
+                        <select className="form-select" value={suplier} onChange={(e)=> setSuplier(e.target.value)}>
+                            <option value={0} disabled>Choose from list</option>
+                            {
+                                supliers?.map(s => <option key={s.id} value={s.id}>{s.title}</option>)
+                            }
+                        </select>
                     </div>
                 </div>
             </div>
-
 
           </div>
           <div className="modal-footer">

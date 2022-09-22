@@ -73,8 +73,7 @@ function Main(){
             </div>
             </div>
         </div>
-        <Edit />
-        
+        <Edit />     
         </Providers.Provider>
     );
 }

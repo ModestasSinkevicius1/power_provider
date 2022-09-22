@@ -14,7 +14,6 @@ function Main(){
     const [modalEdit, setModalEdit] = useState(null);
 
     const [clients, setClients] = useState(null);
-
     const [supliers, setSupliers] = useState(null);
 
     const [date, setDate] = useState(Date.now());
@@ -40,7 +39,7 @@ function Main(){
         if(createData === null){
             return;
         }
-        axios.post('http://localhost:3006/server/Clients', createData)
+        axios.post('http://localhost:3006/server/clients', createData)
         .then(res => {
             setDate(Date.now());
         });
@@ -50,7 +49,7 @@ function Main(){
         if(deleteData === null){
             return;
         }
-        axios.delete('http://localhost:3006/server/Clients/' + deleteData.id)
+        axios.delete('http://localhost:3006/server/clients/' + deleteData.id)
         .then(res => {
             setDate(Date.now());
         });
@@ -60,7 +59,7 @@ function Main(){
         if(editData === null){
           return;
         }
-        axios.put('http://localhost:3006/server/Clients/' + editData.id, editData)
+        axios.put('http://localhost:3006/server/clients/' + editData.id, editData)
         .then(res => {
             setDate(Date.now());
         });
@@ -86,8 +85,7 @@ function Main(){
             </div>
             </div>
         </div>
-        <Edit />
-        
+        <Edit />    
         </Clients.Provider>
     );
 }
