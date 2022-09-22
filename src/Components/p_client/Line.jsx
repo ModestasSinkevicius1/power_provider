@@ -1,28 +1,27 @@
+// import { useContext } from "react";
+// import DataContext from "../Context/DataContext";
+
 import { useContext } from "react";
-import DataContext from "../Context/DataContext";
-import genres from "../Data/genres";
+import Clients from "../../Contexts/Clients";
 
-function Line({movie}){
+function Line({client}){
 
-    const { setModalDelData, setModalData } = useContext(DataContext);
-
+    const { setDeleteData, setModalEdit, supliers } = useContext(Clients);
+    
     return (
         <li className="list-group-item">
             <div className="movie">
                 <div className="movie-content">
                     <div className="movie-content-title">
-                        {movie.title}
+                        {client?.name} {client?.surname}
                     </div>
-                    <div className="movie-content-genre">
-                        {genres.find(g => g.id === movie.genre)?.type}
-                    </div>
-                    <div className="movie-content-year">
-                        {movie.year}
+                    <div className="movie-content-title">
+                        {client?.counter} {supliers?.find(s => s.id === client.power_id)?.title}
                     </div>
                 </div>
                 <div className="movie-buttons">
-                    <button type="button" className="btn btn-outline-success" onClick={() => setModalData(movie)}>Edit</button>
-                    <button type="button" className="btn btn-outline-danger" onClick={() => setModalDelData(movie)}>Delete</button>
+                    <button type="button" className="btn btn-outline-success" onClick={() => setModalEdit(client)}>Edit</button>
+                    <button type="button" className="btn btn-outline-danger" onClick={() => setDeleteData(client)}>Delete</button> 
                 </div>
             </div>
         </li>

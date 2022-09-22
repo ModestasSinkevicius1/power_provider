@@ -1,21 +1,27 @@
 // import { useContext } from "react";
 // import DataContext from "../Context/DataContext";
 
-function Line({movie}){
+import { useContext } from "react";
+import Providers from "../../Contexts/Providers";
 
-    // const { setModalDelData, setModalData } = useContext(DataContext);
+function Line({suplier}){
+
+    const { setDeleteData, setModalEdit } = useContext(Providers);
 
     return (
         <li className="list-group-item">
             <div className="movie">
                 <div className="movie-content">
                     <div className="movie-content-title">
-                        {movie.title}
+                        {suplier?.title}
+                    </div>
+                    <div className="movie-content-title">
+                        {suplier?.price}&euro;/kWh
                     </div>
                 </div>
                 <div className="movie-buttons">
-                    {/* <button type="button" className="btn btn-outline-success" onClick={() => setModalData(movie)}>Edit</button>
-                    <button type="button" className="btn btn-outline-danger" onClick={() => setModalDelData(movie)}>Delete</button> */}
+                    <button type="button" className="btn btn-outline-success" onClick={() => setModalEdit(suplier)}>Edit</button>
+                    <button type="button" className="btn btn-outline-danger" onClick={() => setDeleteData(suplier)}>Delete</button> 
                 </div>
             </div>
         </li>

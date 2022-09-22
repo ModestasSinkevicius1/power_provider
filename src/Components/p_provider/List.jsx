@@ -12,7 +12,7 @@ function List() {
             <div className="card-body">
                 <ul className="list-group">
                     {
-                        supliers?.map(s => <Line key ={s.id} movie={s} />)
+                        supliers?.map(s => <Line key ={s.id} suplier={s} />)
                     }
                 </ul>
             </div>

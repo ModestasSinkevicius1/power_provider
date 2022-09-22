@@ -1,48 +1,52 @@
-import { useContext } from 'react';
-import { useState } from 'react';
-import DataContext from '../Context/DataContext.jsx';
-import genres from '../Data/genres.js'
+import { useState, useContext } from 'react';
+import Clients from '../../Contexts/Clients';
 
 function Create(){
 
-    const [title, setTitle] = useState('');
-    const [genre, setGenre] = useState('0');
-    const [year, setYear] = useState('');
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [number, setNumber] = useState('');
+
+    const [suplier, setSuplier] = useState(0);
     
-    const {setCreateData} = useContext(DataContext);
+    const {setCreateData, supliers} = useContext(Clients);
 
     const add = () => {
         setCreateData({
-            title,
-            genre: parseInt(genre),
-            year,
+            name,
+            surname,
+            number,
+            suplier: parseInt(suplier),
         });
-        setTitle('');
-        setGenre('0');
-        setYear('');
+        setName('');
+        setSurname('');
+        setNumber('');
+        setSuplier(0);
     }
 
     return(
         <div className="create card m-4">
-            <h5 className="card-header">New Movie</h5>
+            <h5 className="card-header">New Client</h5>
             <div className="card-body">
                 <div className="mb-3">
-                    <label className="form-label">Movie Title</label>
-                    <input type="text" className="form-control" value={title} onChange={(e)=> setTitle(e.target.value)}/>
+                    <label className="form-label">Client Name</label>
+                    <input type="text" className="form-control" value={name} onChange={(e)=> setName(e.target.value)}/>
                 </div>
                 <div className="mb-3">
-                    <label className="form-label">Genre</label>
-                    <select className="form-select" value={genre} onChange={(e)=> setGenre(e.target.value)}>
+                        <label className="form-label">Client Surname</label>
+                        <input type="text" className="form-control" value={surname} onChange={(e)=> setSurname(e.target.value)}/>
+                </div>
+                <div className="mb-3">
+                        <label className="form-label">Counter number</label>
+                        <input type="text" className="form-control" value={number} onChange={(e)=> setNumber(e.target.value)}/>
+                </div>
+                <div className="mb-3">
+                    <select className="form-select" value={suplier} onChange={(e)=> setSuplier(e.target.value)}>
                         <option value={0} disabled>Choose from list</option>
                         {
-                            genres.map(g => <option key={g.id} value={g.id}>{g.type}</option>)
+                            supliers?.map(s => <option key={s.id} value={s.id}>{s.title}</option>)
                         }
                     </select>
-                    
-                </div>
-                <div className="mb-3">
-                        <label className="form-label">Movie Year</label>
-                        <input type="text" className="form-control" value={year} onChange={(e)=> setYear(e.target.value)}/>
                 </div>
                 <button type="button" className="btn btn-outline-primary" onClick={add}>Add</button>
             </div>

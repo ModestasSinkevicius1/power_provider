@@ -1,49 +1,45 @@
 import { useContext } from "react";
-import DataContext from "../Context/DataContext";
 import { useState } from 'react';
-import genres from '../Data/genres.js'
 import { useEffect } from "react";
+import Providers from "../../Contexts/Providers";
 
 
 function Edit() {
 
-    const {modalData, setModalData, setEditData} = useContext(DataContext);
+    const {modalEdit, setModalEdit, setEditData} = useContext(Providers);
 
 
     const [title, setTitle] = useState('');
-    const [genre, setGenre] = useState('0');
-    const [year, setYear] = useState('');
+    const [price, setPrice] = useState('');
 
     useEffect(()=>{
-        if(null === modalData){
+        if(null === modalEdit){
             return;
         }
 
-        setTitle(modalData.title);
-        setGenre(modalData.genre);
-        setYear(modalData.year);
-    },[modalData])
+        setTitle(modalEdit.title);
+        setPrice(modalEdit.price);
+    },[modalEdit])
 
     const save = () =>{
         setEditData({
             title,
-            genre: parseInt(genre),
-            year,
-            id: modalData.id,
+            price: parseFloat(price),
+            id: modalEdit.id,
         })
-        setModalData(null);
+        setModalEdit(null);
     }
 
-    if(null === modalData){
+    if(null === modalEdit){
         return;
     }
   return (
-    <div class="modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Edit movie</h5>
-            <button type="button" class="btn-close" onClick={() => setModalData(null)}></button>
+    <div className="modal">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title">Edit provider</h5>
+            <button type="button" className="btn-close" onClick={() => setModalEdit(null)}></button>
           </div>
           <div class="modal-body">
             
@@ -51,31 +47,21 @@ function Edit() {
             <div className="create card m-4">
                 <div className="card-body">
                     <div className="mb-3">
-                        <label className="form-label">Movie Title</label>
+                        <label className="form-label">Provider Title</label>
                         <input type="text" className="form-control" value={title} onChange={(e)=> setTitle(e.target.value)}/>
                     </div>
                     <div className="mb-3">
-                        <label className="form-label">Genre</label>
-                        <select className="form-select" value={genre} onChange={(e)=> setGenre(e.target.value)}>
-                            <option value={0} disabled>Choose from list</option>
-                            {
-                                genres.map(g => <option key={g.id} value={g.id}>{g.type}</option>)
-                            }
-                        </select>
-                        
-                    </div>
-                    <div className="mb-3">
-                            <label className="form-label">Movie Year</label>
-                            <input type="text" className="form-control" value={year} onChange={(e)=> setYear(e.target.value)}/>
+                            <label className="form-label">Provider price</label>
+                            <input type="text" className="form-control" value={price} onChange={(e)=> setPrice(e.target.value)}/>
                     </div>
                 </div>
             </div>
 
 
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onClick={() => setModalData(null)}>Close</button>
-            <button type="button" class="btn btn-primary" onClick={save}>
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" onClick={() => setModalEdit(null)}>Close</button>
+            <button type="button" className="btn btn-primary" onClick={save}> 
               Save changes
             </button>
           </div>
